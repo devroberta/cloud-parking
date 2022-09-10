@@ -9,9 +9,11 @@ import one.digitalinnovation.parking.model.Parking;
 import one.digitalinnovation.parking.service.ParkingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,5 +56,21 @@ public class ParkingController {
     Parking parkingList = parkingService.create(parkingCreate);
     ParkingDTO result = parkingMapper.toParkingDTO(parkingList);
     return ResponseEntity.status(HttpStatus.CREATED).body(result);
+  }
+
+  @DeleteMapping("/{id}")
+  @ApiOperation("Find parking by id")
+  public ResponseEntity delete(@PathVariable String id){
+    parkingService.delete(id);
+    return ResponseEntity.noContent().build();
+  }
+
+  @PutMapping("/{id}")
+  @ApiOperation("Create a parking")
+  public ResponseEntity<ParkingDTO> update(@PathVariable String id, @RequestBody ParkingDTO dto){
+    Parking parkingUpdate = parkingMapper.toParking(dto);
+    Parking parkingList = parkingService.update(id, parkingUpdate);
+    ParkingDTO result = parkingMapper.toParkingDTO(parkingList);
+    return ResponseEntity.status(HttpStatus.OK).body(result);
   }
 }
