@@ -1,9 +1,15 @@
 package one.digitalinnovation.parking.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "tb_parking")
 public class Parking {
 
+  @Id
   private String id;
   private String license;
   private String state;
