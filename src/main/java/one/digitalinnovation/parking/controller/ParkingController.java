@@ -40,13 +40,15 @@ public class ParkingController {
   }
 
   @GetMapping("/{id}")
+  @ApiOperation("Find parking by id")
   public ResponseEntity<ParkingDTO> findById(@PathVariable String id){
-    Parking parkingList = parkingService.findById(id);
-    ParkingDTO result = parkingMapper.toParkingDTO(parkingList);
+    Parking parking = parkingService.findById(id);
+    ParkingDTO result = parkingMapper.toParkingDTO(parking);
     return ResponseEntity.ok(result);
   }
 
   @PostMapping
+  @ApiOperation("Create a parking")
   public ResponseEntity<ParkingDTO> create(@RequestBody ParkingCreateDTO dto){
     Parking parkingCreate = parkingMapper.toParkingCreate(dto);
     Parking parkingList = parkingService.create(parkingCreate);
