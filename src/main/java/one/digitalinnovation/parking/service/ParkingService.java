@@ -61,4 +61,11 @@ public class ParkingService {
     parkingMap.replace(id, parking);
     return parking;
   }
+
+  public Parking exit (String id) {
+    //recuperar o estacionado
+    //atualizar data de saida
+    //calcular o valor
+    return null;
+  }
 }
